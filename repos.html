@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Repositories</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .repo-card {
+            margin-bottom: 20px;
+        }
+
+        .repo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 20px;
+            justify-content: center;
+        }
+
+        .pagination-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .pagination {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .page-item {
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .page-link {
+            text-decoration: none;
+            color: #007bff;
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            padding: 6px 12px;
+            border-radius: 4px;
+        }
+
+        .page-item.active .page-link {
+            background-color: #007bff;
+            color: #fff;
+            border: 1px solid #007bff;
+        }
+
+        .language-button {
+            margin-right: 5px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn btn-secondary mt-3" onclick="goToIndex()">Go Back</button>
+
+    <script>
+        function goToIndex() {
+            window.location.href = 'index.html';
+        }
+    </script>
+
+
+    <div class="container">
+        <div class="row">
+            <!-- User Info Section -->
+            <div id="user-info" class="col-md-4 text-center">
+                <img id="user-avatar" class="avatar img-fluid rounded-circle mb-2" alt="User Avatar">
+            </div>
+            <div class="col-md-8">
+                <h2 id="user-name" class="mb-3"></h2>
+                <p id="user-about"></p>
+                <div id="social-links" class="mb-3"></div>
+                <a id="view-profile-link" href="#" target="_blank" class="btn btn-primary">View Profile</a>
+            </div>
+        </div>
+        <div id="loader" class="text-center mt-3" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <p>Loading...</p>
+        </div>
+
+        <div class="container">
+            <div class="row mt-2">
+
+                <!--  Left Section -->
+                <div class="col-md-6" style="display: flex;">
+                    <div class="form-group">
+                        <label for="pageSizeSelect">Page Size:</label>
+                        <select class="form-control" id="pageSizeSelect" onchange="updatePageSize()">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- Right Section -->
+                <div class="col-md-6" style="display: flex;">
+
+                    <!-- Repositories Section -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="repoFilter">Search Repositories</label>
+                                <input type="text" class="form-control" id="repoFilter" oninput="filterRepositories()">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div id="repos-container" class="repo-grid"></div>
+
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example" id="pagination" class="pagination-container mt-3">
+            <ul class="pagination"></ul>
+        </nav>
+
+        <div id="error-container"></div>
+
+    </div>
+
+    <script src="reposPage.js"></script>
+</body>
+
+</html>
